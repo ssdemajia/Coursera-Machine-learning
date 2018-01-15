@@ -12,7 +12,7 @@ m = size(X, 1);
 num_labels = size(all_theta, 1);
 
 % You need to return the following variables correctly 
-p = zeros(size(X, 1), 1);
+p = zeros(m, 1);
 
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
@@ -29,9 +29,10 @@ X = [ones(m, 1) X];
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
 %       
+[temp, p] = max(X*(all_theta'), [], 2);%需要返回的是最大值的列数
+%，当max返回两个数时，第一个向量返回这一行的最大值，第二个数返回这个最大值的列数
 
-
-
+%max(A, [], 2);是求行向量的最大值
 
 
 

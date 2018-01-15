@@ -36,9 +36,13 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
-
-
-
+temp = sigmoid(X*theta);
+regular = 0;
+for i = 2:length(theta)%theta1不需要被正则化，因为它是bias term
+    regular = regular + theta(i) * theta(i);%正则化项
+J = sum((-y.*log(temp))-(1-y).*log(1-temp))/m + lambda * regular/2/m;
+theta(1) = 0;
+grad = (X'*(temp - y))/m + theta*lambda/m;
 
 
 
