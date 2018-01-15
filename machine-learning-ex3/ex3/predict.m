@@ -22,19 +22,9 @@ p = zeros(size(X, 1), 1);
 %
 %X:5000*400
 X = [ones(m,1) X];%m:25, X:100*401
-%disp("X size");
-%size(X)
 a2 = sigmoid(X*Theta1');%a2:100*25
-%theta2:10*26
-%disp("a2:");
 a2 = [ones(size(a2,1),1) a2];
-%disp("a2 size");
-%size(a2)
-%disp("p:");
 [temp,p] = max(a2*Theta2', [], 2);
-%disp("p size");
-%size(p)
-
 
 
 
