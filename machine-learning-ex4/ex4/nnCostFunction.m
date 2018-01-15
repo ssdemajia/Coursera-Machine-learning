@@ -63,6 +63,28 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
+%添加x0进来
+%
+yk = ones(m,num_labels);
+for i = 1:size(y,1)
+    %将y映射成[
+    %          [1;0;0;0;0;0;0;0];
+    %          [0;1;0;0;0;0;0;0];
+    yk(i,:) = [1:num_labels] == y(i);
+end
+size(yk);
+%计算h
+h1 = sigmoid([ones(m, 1) X] * Theta1');
+h2 = sigmoid([ones(m, 1) h1] * Theta2');
+%计算Theta1所有值的平方和
+Theta1(:,1) = zeros(size(Theta1,1),1);%将第一列化为0
+Theta1s = sum(sum(Theta1.*Theta1,2),1);
+%计算Theta2所有值的平方
+Theta2(:,1) = zeros(size(Theta2,1),1);%将第一列化为0
+Theta2s = sum(sum(Theta2.*Theta2,2),1);
+%计算costfunction
+J = sum(sum((-yk.*log(h2))-(1-yk).*log(1-h2),2))/m +...
+     lambda*(Theta1s + Theta2s)/m/2;
 
 
 
