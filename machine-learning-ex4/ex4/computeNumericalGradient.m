@@ -12,7 +12,8 @@ function numgrad = computeNumericalGradient(J, theta)
 %        be the (approximately) the partial derivative of J with respect 
 %        to theta(i).)
 %                
-
+%disp("theta size: ");
+%size(theta)
 numgrad = zeros(size(theta));
 perturb = zeros(size(theta));
 e = 1e-4;

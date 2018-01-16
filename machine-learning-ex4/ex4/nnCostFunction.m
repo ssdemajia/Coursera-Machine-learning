@@ -74,8 +74,12 @@ for i = 1:size(y,1)
 end
 size(yk);
 %计算h
-h1 = sigmoid([ones(m, 1) X] * Theta1');
-h2 = sigmoid([ones(m, 1) h1] * Theta2');
+a1 = [ones(m, 1) X];
+z2 = a1 * Theta1';
+a2 = sigmoid(z2);
+a2 = [ones(m, 1) a2];
+z3 = a2 * Theta2';
+a3= sigmoid(z3);
 %计算Theta1所有值的平方和
 Theta1(:,1) = zeros(size(Theta1,1),1);%将第一列化为0
 Theta1s = sum(sum(Theta1.*Theta1,2),1);
@@ -83,31 +87,43 @@ Theta1s = sum(sum(Theta1.*Theta1,2),1);
 Theta2(:,1) = zeros(size(Theta2,1),1);%将第一列化为0
 Theta2s = sum(sum(Theta2.*Theta2,2),1);
 %计算costfunction
-J = sum(sum((-yk.*log(h2))-(1-yk).*log(1-h2),2))/m +...
+J = sum(sum((-yk.*log(a3))-(1-yk).*log(1-a3),2))/m +...
      lambda*(Theta1s + Theta2s)/m/2;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%disp("a2 size:");
+%size(a2)
+%disp("a3 size:");
+%size(a3)
+%a2 = a2(:,2:end);
+%计算每一个例子的梯度
+for i = 1:m   
+    d3(i,:) = a3(i,:) - yk(i,:);%输出层的差值,输出的个数
+    Theta2_grad = Theta2_grad + d3(i,:)'*a2(i,:);
+    %disp("d3 size:");
+    size(d3);
+    %disp("Theta2 size:");
+    size(Theta2);  
+    %disp("z2 size:");
+    size(z2);   
+    d2(i,:) = d3(i,:)*Theta2(:,2:end).*sigmoidGradient(z2(i,:));
+    %disp("d2 size:");
+    size(d2);
+    Theta1_grad = Theta1_grad + d2(i,:)'*a1(i,:);
+end
+%disp("D2 size:");
+%size(D2)
+%disp("D1 size:");
+%size(D1)
+Theta1_grad = Theta1_grad/m;
+Theta2_grad = Theta2_grad/m;
 % -------------------------------------------------------------
 
 % =========================================================================
 
 % Unroll gradients
+Theta1_grad += lambda/m*Theta1;%Theta的第一列已经变为0不参与运算
+Theta2_grad += lambda/m*Theta2;
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
+%disp("grad size:");
+%size(grad)
 
 end
