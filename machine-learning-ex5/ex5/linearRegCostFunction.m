@@ -18,10 +18,13 @@ grad = zeros(size(theta));
 %
 %               You should set J to the cost and grad to the gradient.
 %
+temp = X*theta;
+J = sum((temp-y).^2)/2/m;
+theta(1) = 0;
+J += lambda * sum(theta.*theta) /2/m;
 
-
-
-
+%每个theta对应的x相乘，得到相应theta的和
+grad = sum(X'*(temp-y),2)/m + lambda*theta/m;
 
 
 
