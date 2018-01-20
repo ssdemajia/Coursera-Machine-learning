@@ -22,12 +22,27 @@ sigma = 0.3;
 %  Note: You can compute the prediction error using 
 %        mean(double(predictions ~= yval))
 %
+C = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+sigma = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+bestC = 1000;
+bestsigma = 1000;
+bestResult = 1000;
 
-
-
-
-
-
+for i = 1:size(C,2)
+    for j = 1:size(sigma,2)
+        model= svmTrain(X, y, C(i), @(x1, x2) gaussianKernel(x1, x2, sigma(j)));
+        predictions = svmPredict(model, Xval);
+        result = mean(double(predictions ~= yval));%~=判断是否不等，不等为1
+        fprintf("bestResult:%f result:%f C:%f sigma:%f\n", bestResult, result, C(i), sigma(j));
+        if result < bestResult
+            bestResult = result;
+            bestC = C(i);
+            bestsigma = sigma(j);
+        end
+    end
+end
+C = bestC;
+sigma = bestsigma;
 
 % =========================================================================
 

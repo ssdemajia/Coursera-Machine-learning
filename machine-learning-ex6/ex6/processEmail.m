@@ -22,7 +22,7 @@ word_indices = [];
 % email_contents = email_contents(hdrstart(1):end);
 
 % Lower case
-email_contents = lower(email_contents);
+email_contents = lower(email_contents);%将内容转换为小写
 
 % Strip all HTML
 % Looks for any expression that starts with < and ends with > and replace
@@ -66,7 +66,7 @@ while ~isempty(email_contents)
 
     % Stem the word 
     % (the porterStemmer sometimes has issues, so we use a try catch block)
-    try str = porterStemmer(strtrim(str)); 
+    try str = porterStemmer(strtrim(str)); %词干提取工具proterStemmer
     catch str = ''; continue;
     end;
 
@@ -96,7 +96,11 @@ while ~isempty(email_contents)
     % Note: You can use strcmp(str1, str2) to compare two strings (str1 and
     %       str2). It will return 1 only if the two strings are equivalent.
     %
-
+    for i = 1:size(vocabList,1)%遍历整个vocabList
+        if  strcmp(str,vocabList(i)) == 1%等于1表示两个字符串相等
+            word_indices = [word_indices;i];
+        end
+    end
 
 
 

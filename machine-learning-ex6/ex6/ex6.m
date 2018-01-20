@@ -51,8 +51,8 @@ fprintf('\nTraining Linear SVM ...\n')
 % You should try to change the C value below and see how the decision
 % boundary varies (e.g., try C = 1000)
 C = 1;
-model = svmTrain(X, y, C, @linearKernel, 1e-3, 20);
-visualizeBoundaryLinear(X, y, model);
+%model = svmTrain(X, y, C, @linearKernel, 1e-3, 20);
+%visualizeBoundaryLinear(X, y, model);
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
@@ -105,8 +105,10 @@ C = 1; sigma = 0.1;
 % We set the tolerance and max_passes lower here so that the code will run
 % faster. However, in practice, you will want to run the training to
 % convergence.
-model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma)); 
-visualizeBoundary(X, y, model);
+
+
+%model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma)); 
+%visualizeBoundary(X, y, model);
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
@@ -140,7 +142,7 @@ load('ex6data3.mat');
 
 % Try different SVM Parameters here
 [C, sigma] = dataset3Params(X, y, Xval, yval);
-
+fprintf('C and sigma:%f,%f\n',C,sigma);
 % Train the SVM
 model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
 visualizeBoundary(X, y, model);
