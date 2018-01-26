@@ -40,11 +40,14 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+%size()
+J = sum(sum((X*Theta'-Y).^2.*R))/2 + lambda/2*(sum(sum((Theta.*Theta))) + ...
+    sum(sum(X.*X))); 
+%得到的值点乘R，如果R(i,j)=0则就不会计入求和计算，提示和我的想法一样
 
-
-
-
-
+temp = (X*Theta'-Y).*R;
+X_grad = temp*Theta + lambda*X;
+Theta_grad = temp'*X + lambda*Theta;
 
 
 

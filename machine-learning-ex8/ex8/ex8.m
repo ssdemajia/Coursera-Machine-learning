@@ -54,11 +54,11 @@ pause
 fprintf('Visualizing Gaussian fit.\n\n');
 
 %  Estimate my and sigma2
-[mu sigma2] = estimateGaussian(X);
-fprintf("mu : %f, sigma2: %f \n", mu, sigma2);
+[mu sigma2] = estimateGaussian(X); %计算平均值和方差
+%fprintf("mu : %f, sigma2: %f \n", mu, sigma2);
 %  Returns the density of the multivariate normal at each data point (row) 
 %  of X
-p = multivariateGaussian(X, mu, sigma2);
+p = multivariateGaussian(X, mu, sigma2); %计算多元高斯中的p
 
 %  Visualize the fit
 visualizeFit(X,  mu, sigma2);

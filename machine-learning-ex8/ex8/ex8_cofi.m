@@ -174,7 +174,7 @@ load('ex8_movies.mat');
 %  rating to movie i
 
 %  Add our own ratings to the data matrix
-Y = [my_ratings Y];
+Y = [my_ratings Y]; %添加自己的电影打分
 R = [(my_ratings ~= 0) R];
 
 %  Normalize Ratings

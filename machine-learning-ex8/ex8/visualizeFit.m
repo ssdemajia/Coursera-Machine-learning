@@ -13,8 +13,8 @@ plot(X(:, 1), X(:, 2),'bx');
 hold on;
 % Do not plot if there are infinities
 if (sum(isinf(Z)) == 0)
-    contour(X1, X2, Z, 10.^(-20:3:0)');
+    contour(X1, X2, Z, 10.^(-20:3:0)');%contour画出等高线
 end
 hold off;
-
+%surf(X1,X2,Z);%画出3d立体图
 end
