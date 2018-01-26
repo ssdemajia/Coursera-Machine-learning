@@ -21,7 +21,16 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
+for i = 1:size(X,1)
+    i_min = 100000000;
+    for k = 1:K
+        temp = sum((X(i,:)-centroids(k,:)).^2); %计算当前结点到k中心结点的距离
+        if temp < i_min
+            i_min = temp;
+            idx(i) = k;
+        end
+    end
+end
 
 
 

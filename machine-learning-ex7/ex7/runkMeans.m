@@ -39,7 +39,7 @@ for i=1:max_iters
     if exist('OCTAVE_VERSION')
         fflush(stdout);
     end
-    
+     
     % For each example in X, assign it to the closest centroid
     idx = findClosestCentroids(X, centroids);
     
